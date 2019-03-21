@@ -1,0 +1,1 @@
+var db = window.openDatabase("Database", "1.0", "key", 200000);

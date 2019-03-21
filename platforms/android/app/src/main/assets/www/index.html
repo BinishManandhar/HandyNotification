@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<!--
+    Licensed to the Apache Software Foundation (ASF) under one
+    or more contributor license agreements.  See the NOTICE file
+    distributed with this work for additional information
+    regarding copyright ownership.  The ASF licenses this file
+    to you under the Apache License, Version 2.0 (the
+    "License"); you may not use this file except in compliance
+    with the License.  You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing,
+    software distributed under the License is distributed on an
+    "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+     KIND, either express or implied.  See the License for the
+    specific language governing permissions and limitations
+    under the License.
+-->
+<html>
+<head>
+    <!--
+    Customize this policy to fit your own app's needs. For more guidance, see:
+        https://github.com/apache/cordova-plugin-whitelist/blob/master/README.md#content-security-policy
+    Some notes:
+        * gap: is required only on iOS (when using UIWebView) and is needed for JS->native communication
+        * https://ssl.gstatic.com is required only on Android and is needed for TalkBack to function properly
+        * Disables use of inline scripts in order to mitigate risk of XSS vulnerabilities. To change this:
+            * Enable inline JS: add 'unsafe-inline' to default-src
+    -->
+    <meta name="viewport"
+          content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
+    <meta charset="utf-8"/>
+    <link rel="stylesheet"
+          href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css"/>
+    <!-- Optional theme -->
+    <link rel="stylesheet"
+          href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css"/>
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css?family=Dancing+Script">
+    <title>Handy Notification</title>
+    <link rel="stylesheet" href="css/styles.css"/>
+</head>
+<body>
+<section class="top-header">
+    <div class="headTitle">
+        Handy Notification
+    </div>
+</section>
+
+<section id="keyPage">
+    <div class="container-fluid">
+        <form>
+            <div class="input-group authInput">
+                <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+                <input id="authorization" class="form-control" placeholder="Authorization Key">
+            </div>
+            <span class="mainSpan">
+                <button type="button" class="btn btn-primary authButton" id="save"
+                        onclick="toMain('save');">Save</button>
+                <a href="#" data-transition="slide:left">
+                    <button type="button" class="btn btn-primary authButton" id="submit"
+                            onclick="toMain('next');">Next
+                    </button>
+                </a>
+            </span>
+        </form>
+        <table class="table table-hover keyTable">
+            <thead>
+            <tr>
+                <th>Project Name</th>
+                <th class="mainSpan">Action</th>
+            </tr>
+            </thead>
+            <tbody id="authTable">
+
+            </tbody>
+        </table>
+    </div>
+</section>
+
+
+<section id="homePage" class="hide">
+    <div class="container-fluid">
+        <form class="form-horizontal">
+            <div class="input-group authInput">
+                <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                <input id="topic" class="form-control" placeholder="Topic / To">
+            </div>
+            <div class="input-group authInput">
+                <span class="input-group-addon"><i class="glyphicon glyphicon-barcode"></i></span>
+                <input id="channelID" class="form-control" placeholder="Android Channel ID">
+            </div>
+            <div class="input-group authInput">
+                <span class="input-group-addon"><i class="glyphicon glyphicon-info-sign"></i></span>
+                <input id="title" class="form-control" placeholder="Notification Title">
+            </div>
+            <div class="input-group authInput">
+                <span class="input-group-addon"><i class="glyphicon glyphicon-comment"></i></span>
+                <input id="message" class="form-control" placeholder="Message">
+            </div>
+
+            <div class="input-group authInput">
+                <span class="input-group-addon"><i class="glyphicon glyphicon-bell"></i></span>
+                <input id="soundName" class="form-control" placeholder="Sound Name" value="default">
+            </div>
+
+
+            <div onclick="collapseListener('picture');" data-toggle="collapse" data-target="#picturePayload"><i
+                    id="picturePlus" class="glyphicon glyphicon-plus-sign icon-optional"></i></div>
+            <div class="mainSpan">Picture Payload</div>
+            <div id="picturePayload" class="collapse">
+                <div class="input-group authInput">
+                    <span class="input-group-addon"><i
+                            class="glyphicon glyphicon-eye-open"></i></span>
+                    <input id="style" class="form-control" placeholder="Style" value="picture">
+                </div>
+                <div class="input-group authInput">
+                    <span class="input-group-addon"><i
+                            class="glyphicon glyphicon-picture"></i></span>
+                    <input id="picture" class="form-control" placeholder="Picture (URL)">
+                </div>
+                <div class="input-group authInput">
+                    <span class="input-group-addon"><i
+                            class="glyphicon glyphicon-text-size"></i></span>
+                    <input id="summaryText" class="form-control" placeholder="Summary Text">
+                </div>
+            </div>
+
+
+            <div onclick="collapseListener('optional');" data-toggle="collapse" data-target="#optional"><i
+                   id="optionalPlus" class="glyphicon glyphicon-plus-sign icon-optional"></i></div>
+            <div class="mainSpan">Additional</div>
+            <div id="optional" class="collapse">
+                <div class="text-optional">Priority</div>
+                <div class="input-group authInput">
+                    <span class="input-group-addon"><i class="glyphicon glyphicon-sort"></i></span>
+                    <div class="input-group">
+                        <button id="priorityButton" type="button"
+                                class="btn btn-default btn-width dropdown-toggle"
+                                data-toggle="dropdown">
+                            Priority
+                            <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><a href="#">-2</a></li>
+                            <li><a href="#">1</a></li>
+                            <li class="active"><a href="#">0</a></li>
+                            <li><a href="#">1</a></li>
+                            <li><a href="#">2</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="text-optional">Vibration Pattern</div>
+                <div class="input-group authInput">
+                    <span class="input-group-addon"><i
+                            class="glyphicon glyphicon-phone"></i></span>
+                    <span class="input-group">
+                        <input id="vibration1" class="form-control input-sm input-optional" placeholder="Off"/>
+                    </span>
+                    <span class="input-group">
+                        <input id="vibration2" class="form-control input-sm input-optional" placeholder="On">
+                    </span>
+                    <span class="input-group">
+                        <input id="vibration3" class="form-control input-sm input-optional" placeholder="Alt">
+                    </span>
+                    <span class="input-group">
+                        <input id="vibration4" class="form-control input-sm input-optional" placeholder="Alt">
+                    </span>
+                </div>
+
+                <div class="text-optional">LED Color</div>
+                <div class="input-group authInput">
+                    <span class="input-group-addon"><i
+                            class="glyphicon glyphicon-adjust"></i></span>
+                    <span class="input-group">
+                        <input id="ledA" class="form-control input-sm input-optional" placeholder="A">
+                    </span>
+                    <span class="input-group">
+                        <input id="ledR" class="form-control input-sm input-optional" placeholder="R">
+                    </span>
+                    <span class="input-group">
+                        <input id="ledG" class="form-control input-sm input-optional" placeholder="G">
+                    </span>
+                    <span class="input-group">
+                        <input id="ledB" class="form-control input-sm input-optional" placeholder="B">
+                    </span>
+                </div>
+            </div>
+            <span class="mainSpan">
+                <button class="btn btn-primary mainButton" id="send">Send</button>
+                <button class="btn btn-primary mainButton" id="clear"
+                        onclick="clearValues();">Clear</button>
+            </span>
+        </form>
+    </div>
+</section>
+
+
+<!----Modal----->
+<div class="modal fade" id="saveDialog" role="dialog">
+    <div class="modal-dialog centerPoint">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Save Authorization Key</h4>
+            </div>
+            <div class="modal-body input-group">
+                <span class="input-group-addon"><i class="glyphicon glyphicon-tag"></i></span>
+                <input id="projectName" class="form-control" placeholder="Project Name">
+            </div>
+            <div class="modal-footer">
+                <span class="mainSpan">
+                    <button type="button" class="btn btn-primary authButton"
+                            data-dismiss="modal" onclick="saveKey();">Save</button>
+                </span>
+            </div>
+        </div>
+    </div>
+</div>
+<!------------->
+
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+<script src="cordova.js"></script>
+<script src="cordova_plugins.js"></script>
+<script src="js/jquery-3.3.1.min.js"></script>
+<script src="js/Database.js"></script>
+<script src="js/index.js"></script>
+<script src="js/main.js"></script>
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+
+<script>
+ $(function(){
+
+   $(".dropdown-menu").on('click', 'li a', function(){
+      $("#priorityButton").text($(this).text());
+      $("#priorityButton").val($(this).text());
+   });
+
+ });
+
+
+
+
+</script>
+
+</body>
+</html>

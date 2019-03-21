@@ -1,0 +1,18 @@
+.authButton{
+    display: block;
+    margin: 0 auto;
+    margin-top: 10px;
+    background: #1abc9c;
+}
+.authInput{
+    margin-top: 20px;
+}
+
+.headTitle{
+    padding: 10px;
+    text-align: center;
+    background: #1abc9c;
+    color: white;
+    font-size: 20px;
+    font-family: "Dancing Script", serif;
+}

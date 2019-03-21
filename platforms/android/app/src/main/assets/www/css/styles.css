@@ -1,0 +1,85 @@
+.authButton{
+    display: inline-block;
+    margin: 0 auto;
+    margin-top: 20px;
+    border: none;
+    background: #1abc9c;
+}
+.mainButton{
+    display: inline-block;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    background: #1abc9c;
+    border: none;
+}
+.mainSpan{
+    text-align: center;
+    margin: 0 auto;
+    width: 100%;
+    display: block;
+}
+
+.authInput{
+    margin-top: 20px;
+}
+
+.input-group {
+    width: auto;
+}
+
+.headTitle{
+    padding: 10px;
+    text-align: center;
+    background: #1abc9c;
+    color: white;
+    font-size: 25px;
+    font-family: "Dancing Script", serif;
+}
+
+.keyTable{
+    margin-top: 20px;
+    padding: 10px;
+}
+
+.icon-space{
+    margin-left: 20px;
+}
+
+.icon-optional{
+    text-align: center;
+    margin: 0 auto;
+    width: 100%;
+    display: block;
+    margin-top:20px;
+    margin-bottom:10px;
+    font-size: 30px;
+}
+
+.text-optional{
+    margin-top:15px;
+    font-size: 12px;
+}
+
+.input-optional{
+    text-align:center;
+}
+
+
+.centerPoint {
+    position: fixed;
+    top: 40%;
+    left: 42%; /*50%*/
+    width: 70%; /*200px*/
+    margin-left: -100px;
+    height: 50px;
+    margin-top: -25px;
+}
+
+.btn-width{
+    width: 100px; !important
+}
+
+.hide{
+    display:none;
+}
+

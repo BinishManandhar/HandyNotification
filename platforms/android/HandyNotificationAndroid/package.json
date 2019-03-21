@@ -1,0 +1,17 @@
+{
+  "name": "binish.handynotification",
+  "version": "1.0.0",
+  "description": "Sending push notification through JAVA",
+  "cordova": {
+    "id": "binish.handynotification",
+    "platforms": [
+      "android"
+    ]
+  },
+  "keywords": [
+    "ecosystem:cordova",
+    "cordova-android"
+  ],
+  "author": "Binish Manandhar",
+  "license": "ISC"
+}
