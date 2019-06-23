@@ -1,5 +1,6 @@
 package binish.handynotification;
 
+import android.os.Looper;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -37,21 +38,26 @@ public class HandyNotificationAndroid extends CordovaPlugin {
             String title = args.getString(2);
             String message = args.getString(3);
             String androidChannelID = args.getString(4);
-            String soundName = args.getString(5);
-            String style = args.getString(6);
-            String picture = args.getString(7);
-            String summaryText = args.getString(8);
-            String priority = args.getString(9);
-            JSONArray vibrationPattern = args.getJSONArray(10);
-            JSONArray ledColor = args.getJSONArray(11);
+            String image = args.getString(5);
+            String icon = args.getString(6);
+            String soundName = args.getString(7);
+            String style = args.getString(8);
+            String picture = args.getString(9);
+            String summaryText = args.getString(10);
+            String notID = args.getString(11);
+            String priority = args.getString(12);
+            JSONArray vibrationPattern = args.getJSONArray(13);
+            JSONArray ledColor = args.getJSONArray(14);
 
-            Check check = new Check();
+            Log.i("pushNotification","Title:"+title+" Message:"+message+" Image:"+image);
+
+            Check check = new Check(this.cordova.getActivity());
 
             AUTH_KEY_FCM = finalKey;
             cordova.getThreadPool().execute(() -> {
                 try {
-                    this.pushNotification(topic,title,message,androidChannelID,soundName,style,
-                            check.checkPicture(picture),check.checkSummaryText(summaryText),priority,check.checkVibrationPattern(vibrationPattern),
+                    this.pushNotification(topic,title,message,androidChannelID,check.checkImage(image),check.checkIcon(icon),soundName,style,
+                            check.checkPicture(picture),check.checkSummaryText(summaryText),check.checkNotID(notID),priority,check.checkVibrationPattern(vibrationPattern),
                             check.checkLedColor(ledColor), callbackContext);
                 } catch (IOException e) {
                     e.printStackTrace();
@@ -63,11 +69,14 @@ public class HandyNotificationAndroid extends CordovaPlugin {
     }
 
     private void pushNotification
-            (String topic,String title,String message,String androidChannelID,
+            (String topic,String title,String message,String androidChannelID,String image,String icon,
              String soundName,String style,String picture,
-             String summaryText,String priority,JSONArray vibrationPattern,JSONArray ledColor, CallbackContext callbackContext) throws IOException {
+             String summaryText,int notID,String priority,JSONArray vibrationPattern,JSONArray ledColor, CallbackContext callbackContext) throws IOException {
 
-        Log.i("pushNotification","Topic:"+topic+" Key:"+AUTH_KEY_FCM+" androidChannelID:"+androidChannelID);
+        if(notID==-1) {
+            callbackContext.error("Invalid notID");
+            return;
+        }
         String result = "";
         URL url = new URL(API_URL_FCM);
         HttpURLConnection conn = (HttpURLConnection) url.openConnection();
@@ -87,12 +96,18 @@ public class HandyNotificationAndroid extends CordovaPlugin {
             data.put("title", title); // Notification title
             data.put("message", message); // Notification
             data.put("android_channel_id", androidChannelID);
-            data.put("icon", "alexa_rank");
-            data.put("image", "icon");
-            data.put("image-type", "circular");
             data.put("soundname", soundName);
             data.put("priority", priority);
-            data.put("notId", 11);
+            data.put("notId", notID);
+
+
+            if(!icon.equals(checkNULL))
+                data.put("icon", icon);
+
+            if(!image.equals(checkNULL)) {
+                data.put("image", image);
+                data.put("image-type", "circular");
+            }
 
             if(!picture.equals(checkNULL)){
                 data.put("style",style);

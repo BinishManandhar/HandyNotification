@@ -1,9 +1,19 @@
 package binish.handynotification.Controller;
 
+import android.content.Context;
+import android.os.Looper;
+
 import org.json.JSONArray;
+
+import nl.xservices.plugins.Toast;
 
 public class Check {
     public static String checkNULL = "NULL";
+    public Context context;
+
+    public Check(Context context){
+        this.context = context;
+    }
 
     //    soundName,style,picture,summaryText,priority,vibrationPattern,ledColor
 
@@ -21,6 +31,20 @@ public class Check {
 //        return soundName;
 //    }
 
+    public String checkImage(String image){
+        if(image.equals("")){
+            return checkNULL;
+        }
+        return image;
+    }
+
+    public String checkIcon(String icon){
+        if (icon.equals("")){
+            return checkNULL;
+        }
+        return icon;
+    }
+
     public String checkPicture(String picture){
         if(picture.equals("")){
             return checkNULL;
@@ -35,6 +59,20 @@ public class Check {
         return summaryText;
     }
 
+    public int checkNotID(String notID){
+        if(notID.equals(""))
+            return 1;
+        try {
+            int notId = Integer.parseInt(notID);
+            if (notId >= 0)
+                return notId;
+            else
+                return 1;
+        }
+        catch (NumberFormatException e){
+            return -1;
+        }
+    }
     public JSONArray checkVibrationPattern(JSONArray vibrationPattern){
         try {
             if (vibrationPattern.get(0).equals(""))

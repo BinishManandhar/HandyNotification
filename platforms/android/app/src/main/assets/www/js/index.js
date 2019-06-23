@@ -46,6 +46,7 @@ function saveKey(){
 }
 
 function nextKey(){
+    $('button#saveMain').addClass('hide');
     auth = $('input#authorization').val();
     transition();
 }
@@ -60,7 +61,6 @@ function displayKeyTable(){
                         '<td>'+rs.rows.item(i).name+'</td>'+
                         '<td class="mainSpan">'+
                             '<i class="glyphicon glyphicon-ok" onclick="transition('+rs.rows.item(i).key_id+');"></i>'+
-                            '<i class="icon-space glyphicon glyphicon-pencil"></i>'+
                             '<i class="icon-space glyphicon glyphicon-trash" onclick="showConfirm('+rs.rows.item(i).key_id+');"></i>'+
                         '</td>'+
                     '<tr>'

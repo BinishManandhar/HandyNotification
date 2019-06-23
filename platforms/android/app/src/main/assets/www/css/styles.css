@@ -7,11 +7,24 @@
 }
 .mainButton{
     display: inline-block;
-    margin-top: 20px;
-    margin-bottom: 20px;
+    /*margin-top: 20px;
+    margin-bottom: 20px;*/
+    margin: 20px;
     background: #1abc9c;
     border: none;
 }
+
+.sendButton{
+    display: inline-block;
+    /*margin-top: 20px;
+    margin-bottom: 20px;*/
+    margin: 20px;
+    background: #1abc9c;
+    border: none;
+    width: 70px; !important
+    font-size: 30px;
+}
+
 .mainSpan{
     text-align: center;
     margin: 0 auto;

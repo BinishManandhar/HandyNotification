@@ -101,10 +101,19 @@
             </div>
 
             <div class="input-group authInput">
+                <span class="input-group-addon"><i class="glyphicon glyphicon-unchecked"></i></span>
+                <input id="image" class="form-control" placeholder="Large Icon (URL or drawable asset)">
+            </div>
+
+            <div class="input-group authInput">
+                <span class="input-group-addon"><i class="glyphicon glyphicon-apple"></i></span>
+                <input id="icon" class="form-control" placeholder="Small Icon (URL or drawable asset)">
+            </div>
+
+            <div class="input-group authInput">
                 <span class="input-group-addon"><i class="glyphicon glyphicon-bell"></i></span>
                 <input id="soundName" class="form-control" placeholder="Sound Name" value="default">
             </div>
-
 
             <div onclick="collapseListener('picture');" data-toggle="collapse" data-target="#picturePayload"><i
                     id="picturePlus" class="glyphicon glyphicon-plus-sign icon-optional"></i></div>
@@ -132,6 +141,11 @@
                    id="optionalPlus" class="glyphicon glyphicon-plus-sign icon-optional"></i></div>
             <div class="mainSpan">Additional</div>
             <div id="optional" class="collapse">
+                <div class="input-group authInput">
+                    <span class="input-group-addon"><i class="glyphicon glyphicon-qrcode"></i></span>
+                    <input id="notID" type="number" class="form-control" placeholder="Notification ID (Default: 1)">
+                </div>
+
                 <div class="text-optional">Priority</div>
                 <div class="input-group authInput">
                     <span class="input-group-addon"><i class="glyphicon glyphicon-sort"></i></span>
@@ -144,7 +158,7 @@
                         </button>
                         <ul class="dropdown-menu">
                             <li><a href="#">-2</a></li>
-                            <li><a href="#">1</a></li>
+                            <li><a href="#">-1</a></li>
                             <li class="active"><a href="#">0</a></li>
                             <li><a href="#">1</a></li>
                             <li><a href="#">2</a></li>
@@ -156,16 +170,16 @@
                     <span class="input-group-addon"><i
                             class="glyphicon glyphicon-phone"></i></span>
                     <span class="input-group">
-                        <input id="vibration1" class="form-control input-sm input-optional" placeholder="Off"/>
+                        <input id="vibration1" type="number" class="form-control input-sm input-optional" placeholder="Off"/>
                     </span>
                     <span class="input-group">
-                        <input id="vibration2" class="form-control input-sm input-optional" placeholder="On">
+                        <input id="vibration2" type="number" class="form-control input-sm input-optional" placeholder="On">
                     </span>
                     <span class="input-group">
-                        <input id="vibration3" class="form-control input-sm input-optional" placeholder="Alt">
+                        <input id="vibration3" type="number" class="form-control input-sm input-optional" placeholder="Alt">
                     </span>
                     <span class="input-group">
-                        <input id="vibration4" class="form-control input-sm input-optional" placeholder="Alt">
+                        <input id="vibration4" type="number" class="form-control input-sm input-optional" placeholder="Alt">
                     </span>
                 </div>
 
@@ -174,21 +188,23 @@
                     <span class="input-group-addon"><i
                             class="glyphicon glyphicon-adjust"></i></span>
                     <span class="input-group">
-                        <input id="ledA" class="form-control input-sm input-optional" placeholder="A">
+                        <input id="ledA" type="number" class="form-control input-sm input-optional" placeholder="A">
                     </span>
                     <span class="input-group">
-                        <input id="ledR" class="form-control input-sm input-optional" placeholder="R">
+                        <input id="ledR" type="number" class="form-control input-sm input-optional" placeholder="R">
                     </span>
                     <span class="input-group">
-                        <input id="ledG" class="form-control input-sm input-optional" placeholder="G">
+                        <input id="ledG" type="number" class="form-control input-sm input-optional" placeholder="G">
                     </span>
                     <span class="input-group">
-                        <input id="ledB" class="form-control input-sm input-optional" placeholder="B">
+                        <input id="ledB" type="number" class="form-control input-sm input-optional" placeholder="B">
                     </span>
                 </div>
             </div>
             <span class="mainSpan">
-                <button class="btn btn-primary mainButton" id="send">Send</button>
+                <button class="btn btn-primary mainButton" id="saveMain" onclick="sendRequest('save')">Save</button>
+                <button class="btn btn-primary sendButton" id="send" onclick="sendRequest('send')"><i
+                        class="glyphicon glyphicon-send"></i></button>
                 <button class="btn btn-primary mainButton" id="clear"
                         onclick="clearValues();">Clear</button>
             </span>
